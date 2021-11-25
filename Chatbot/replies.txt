@@ -1,0 +1,8 @@
+questions,how are you,what is your favourite,do you
+greetings,hey,hi,hello
+spamming,spam
+programs,launch,start,@
+websites,open,#
+google,why,how,search
+remainders,save a day,save an occasion,save an event
+    
