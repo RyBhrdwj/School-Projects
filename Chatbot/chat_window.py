@@ -1,6 +1,5 @@
 from configparser import ConfigParser
 
-from spammer import Spammer
 import webbrowser as w
 import pyautogui as p
 import tkinter as tk
@@ -31,10 +30,8 @@ class ChatGUI(tk.Tk):
 
         self.tools_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label='Tools', menu=self.tools_menu)
-        self.tools_menu.add_command(label="New", command=self.destroy)
+        self.tools_menu.add_command(label="Exit", command=self.destroy)
         self.tools_menu.add_command(label="Clear Chat", command=self.clear_chat)
-
-        self.menubar.add_command(label='Dark Mode', command=self.toggle_mode)
 
         # self.customize_menu = tk.Menu(self.menubar, tearoff=0)
         # self.menubar.add_cascade(label="Customize", menu=self.customize_menu)
@@ -191,7 +188,7 @@ class ChatGUI(tk.Tk):
             return text
 
         def open_website():
-            website = user_query.split('open ' and '#')[1]
+            website = user_query.split('open ' or '#')[1]
             basic_websites = {'google': 'https://www.google.com/', 'facebook': 'https://www.facebook.com/',
                               'instagram': 'https://www.instagram.com/', 'quora': 'https://www.quora.com/',
                               'youtube': 'https://www.youtube.com/', 'wikipedia': 'https://www.wikipedia.org/',
@@ -211,7 +208,7 @@ class ChatGUI(tk.Tk):
             return text
 
         def google():
-            w.open(f'https://www.google.com/search?q={user_query}')
+            w.open(f'https://www.google.com/search?q={user_query.split()[1]}')
             return 'Hope you got what you were looking for :D'
 
         def open_program():
@@ -225,13 +222,10 @@ class ChatGUI(tk.Tk):
             p.sleep(3)
             p.press('enter')
 
-            return text  
-
-        def spam_app():
-            Spammer(self)
+            return text
 
         replies = {'greetings': greet, 'websites': open_website, 'programs': open_program,
-                   'spamming': spam_app, 'google': google}
+                   'google': google}
         message = replies[keyword_type]()
 
         return message  # returns the inner function
@@ -249,7 +243,6 @@ if __name__ == '__main__':
 
     categories = """questions,how are you,what is your favourite,do you
 greetings,hey,hi,hello
-spamming,spam
 programs,launch,start,@
 websites,open,#
 google,why,how,search
